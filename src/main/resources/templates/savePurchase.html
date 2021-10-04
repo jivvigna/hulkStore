@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<div th:replace="fragments/header :: header-css" />
+</head>
+
+<body>
+
+	<div th:replace="fragments/header :: header" />
+
+
+	<div class="container">
+
+		<div class="starter-template">
+
+			<div class="row">
+
+				<div>
+					<h5 th:inline="text">Hola [[${#httpServletRequest.remoteUser}]]!</h5>
+				</div>	
+				
+				
+			  <!--Menu lateral izquierdo-->
+			  <div class="col-12 col-md-2">
+			       <ul class="list-group">
+			           <li class="list-group-item"><a th:href="@{/getAllEmployees}">Empleados</a></li>
+			           <li class="list-group-item"><a th:href="@{/getAllProducts}">Productos</a></li>
+		               <li class="list-group-item"><a th:href="@{/showFormSavePurchase}">Comprar</a></li>
+				        <li class="list-group-item">
+				        <form th:action="@{/logout}" method="post">
+				            <input type="submit" class="btn btn-block" value="Cerrar Session"/>
+				        </form>
+				        </li>
+			           
+			       </ul>
+			  </div>
+			  
+			  <!--body -->
+			  
+      			  <div class="col-12 col-md-8">
+      			  
+					    <!--Formulario para agregar productos a la compra -->
+					    <form action="#" th:action="@{/addProductPurchase}" th:object="${productPurchaseForm}" method='POST' class="form-horizontal">
+			                
+			                <div class="form-group">
+			                    <div class="col-sm-9">
+				                    <select th:field="*{id}" class="form-control">
+				                         <option th:each="product : ${products}"
+		 			                             th:value="${product.id}"
+						                         th:utext="${product.name}"/>
+						            </select>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <div class="col-sm-9">
+			                        <input type="number" th:field="*{quantity}" placeholder="Cantidad" class="form-control"/>
+			                        <label th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"
+			                               class="validation-message"></label>
+			                    </div>
+			                </div>
+			                
+			                <div class="form-group">
+			                    <div class="col-sm-3">
+			                        <button type="submit" class="btn btn-primary btn-block">Agregar</button>
+			                    </div>
+			                </div>
+			                    					            
+					    </form>
+					    
+					    
+					    <!--Listado de productos agregados a la compra -->
+						<h3>Productos</h3> 
+						<table class="table">
+							    <thead>
+								    <tr>
+								        <th>Id Producto</th>
+								        <th>Nombre</th>
+								        <th>Cantidad</th>
+								        <th>SubTotal</th>
+								    </tr>
+							    </thead>
+							    <tbody>
+								    <tr th:each="productPurchase : ${productPurchases}">
+								        <td th:text="${productPurchase.product.id}"></td>
+								        <td th:text="${productPurchase.name}"></td>
+								        <td th:text="${productPurchase.quantity}"></td>
+								        <td th:text="${productPurchase.subTotal}"></td>
+	                                    <td>
+	                                        <a class="btn btn-danger" th:href="@{/deleteProductPurchase(idProduct=${productPurchase.product.id})}">Eliminar</a>
+	                                    </td>
+								    </tr>
+							    </tbody>
+						</table>
+						
+		                <div class="form-group">
+		                    <div class="col-sm-3">
+		                    	<a th:href="@{/savePurchase}" class="btn btn-primary btn-block">Finalizar la Compra</a>
+		                    
+		                        <!--button th:href="@{/savePurchase}" type="submit" class="btn btn-primary btn-block">Agregar</button-->
+		                    </div>
+		                </div>
+      			  </div>   
+			  <!--end body -->
+	    </div>
+    </div>
+    
+	<footer>
+	</footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<div th:replace="fragments/header :: header-css" />
+</head>
+
+<body>
+
+	<div th:replace="fragments/header :: header" />
+
+
+	<div class="container">
+
+		<div class="starter-template">
+
+			<div class="row">
+
+				<div>
+					<h5 th:inline="text">Hola [[${#httpServletRequest.remoteUser}]]!</h5>
+				</div>	
+				
+				
+			  <!--Menu lateral izquierdo-->
+			  <div class="col-12 col-md-2">
+			       <ul class="list-group">
+			           <li class="list-group-item"><a th:href="@{/getAllEmployees}">Empleados</a></li>
+			           <li class="list-group-item"><a th:href="@{/getAllProducts}">Productos</a></li>
+			           <li class="list-group-item"><a th:href="@{/showFormSavePurchase}">Comprar</a></li>
+				        <li class="list-group-item">
+					        <form th:action="@{/logout}" method="post">
+					            <input type="submit" class="btn btn-block" value="Cerrar Session"/>
+					        </form>
+			            </li>
+			       </ul>
+			  </div>
+			  
+		  
+			  <!--body -->
+			  <div class="col-12 col-md-10">
+			  		<h3><span class="text-success" th:utext="${message}"></span></h3>
+			  </div>
+	    </div>
+    </div>
+    
+    
+		
+	<footer>
+	        <!--form th:action="@{/logout}" method="post">
+	            <input type="submit" value="Cerrar Session"/>
+	        </form-->
+	</footer>
+
+</div>
+
+</body>
+</html>

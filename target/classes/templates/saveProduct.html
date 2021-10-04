@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<div th:replace="fragments/header :: header-css" />
+</head>
+
+<body>
+
+	<div th:replace="fragments/header :: header" />
+
+
+	<div class="container">
+
+		<div class="starter-template">
+
+			<div class="row">
+
+				<div>
+					<h5 th:inline="text">Hola [[${#httpServletRequest.remoteUser}]]!</h5>
+				</div>	
+				
+				
+			  <!--Menu lateral izquierdo-->
+			  <div class="col-12 col-md-2">
+			       <ul class="list-group">
+			           <li class="list-group-item"><a th:href="@{/getAllEmployees}">Empleados</a></li>
+			           <li class="list-group-item"><a th:href="@{/getAllProducts}">Productos</a></li>
+		               <li class="list-group-item"><a th:href="@{/showFormSavePurchase}">Comprar</a></li>
+				        <li class="list-group-item">
+				        <form th:action="@{/logout}" method="post">
+				            <input type="submit" class="btn btn-block" value="Cerrar Session"/>
+				        </form>
+				        </li>
+			           
+			       </ul>
+			  </div>
+			  
+			  <!--body -->
+			  
+      			  <div class="col-12 col-md-6">
+
+                    <form action="#" th:action="@{/saveProduct}" th:object="${productForm}" method="post" class="form-horizontal">
+      
+		                <h2>Crear Producto</h2>
+		                <div class="form-group">
+		                    <div class="col-sm-9">
+		                        <input type="text" th:field="*{name}" placeholder="Nombre" class="form-control" required="true"/>
+		                        <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+		                               class="validation-message"></label>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <div class="col-sm-9">
+		                        <input type="text" th:field="*{description}" placeholder="Descripcion" class="form-control" required="true"/>
+		                        <label th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+		                               class="validation-message"></label>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <div class="col-sm-9">
+		                        <input type="number" th:field="*{price}" placeholder="Precio" class="form-control" required="true"/>
+		                        <label th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+		                               class="validation-message"></label>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <div class="col-sm-9">
+		                        <input type="number" th:field="*{stock}" placeholder="Stock" class="form-control" required="true"/>
+		                        <label th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"
+		                               class="validation-message"></label>
+		                    </div>
+		                </div>
+		
+		                <div class="form-group">
+		                    <div class="col-sm-3">
+		                        <button type="submit" class="btn btn-primary btn-block">Aceptar</button>
+		                    </div>
+		                </div>
+		
+		            </form>
+      			  </div>   
+			  
+			  <!--end body -->
+	    </div>
+    </div>
+    
+	<footer>
+	</footer>
+
+</div>
+
+</body>
+</html>

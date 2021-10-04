@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hulk Store</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+
+        <button type="button" class="btn btn-secondary btn-lg btn-block"><a th:href="@{/admin}">Acceso Administración</a></button>
+        <!--button type="button" class="btn btn-secondary btn-lg btn-block"><a th:href="@{/user}">Acceso Empleados</a></button-->
+        
+    </div>
+
+</div>
+<!-- /.container -->
+
+<!--div th:replace="fragments/footer :: footer"/-->
+
+</body>
+</html>
